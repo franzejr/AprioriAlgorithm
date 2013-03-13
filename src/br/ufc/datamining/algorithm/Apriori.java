@@ -7,12 +7,21 @@ import arida.ufc.br.moap.association.api.IAssociationRule;
 import arida.ufc.br.moap.association.api.Item;
 import arida.ufc.br.moap.association.api.TransactionFormat;
 import arida.ufc.br.moap.core.imp.Parameters;
+import arida.ufc.br.moap.core.spi.IDataModel;
 import arida.ufc.br.moap.datamodelapi.imp.ListModelImpl;
 import arida.ufc.br.moap.datamodelapi.instances.api.IInstancesBasedModel;
 
 
 public class Apriori extends AssociationRulesAlgorithm {
-
+	
+	@Override
+	public ListModelImpl<IAssociationRule> execute(IInstancesBasedModel data,
+			Parameters parameters) {
+		
+		//PASSOS DO ALGORITMO
+		return null;
+	}
+	
 	@Override
 	public int getItemAttributeIndex() {
 		// TODO Auto-generated method stub
@@ -75,16 +84,8 @@ public class Apriori extends AssociationRulesAlgorithm {
 	}
 
 	@Override
-	public ListModelImpl<IAssociationRule> execute(IInstancesBasedModel data,
-			Parameters parameters) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
 	public String getName() {
-		// TODO Auto-generated method stub
-		return null;
+		return "Apriori";
 	}
 
 

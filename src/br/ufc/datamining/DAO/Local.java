@@ -1,10 +1,13 @@
 package br.ufc.datamining.DAO;
 
-public class Local {
+import arida.ufc.br.moap.association.api.Item;
+
+public class Local extends Item {
 	String ID;
 	String name;
 
 	public Local(String ID, String name) {
+		super(ID);
 		this.ID = ID;
 		this.name = name;
 	}
