@@ -7,7 +7,6 @@ import arida.ufc.br.moap.association.api.IAssociationRule;
 import arida.ufc.br.moap.association.api.Item;
 import arida.ufc.br.moap.association.api.TransactionFormat;
 import arida.ufc.br.moap.core.imp.Parameters;
-import arida.ufc.br.moap.core.spi.IDataModel;
 import arida.ufc.br.moap.datamodelapi.imp.ListModelImpl;
 import arida.ufc.br.moap.datamodelapi.instances.api.IInstancesBasedModel;
 
@@ -19,6 +18,13 @@ public class Apriori extends AssociationRulesAlgorithm {
 			Parameters parameters) {
 		
 		//PASSOS DO ALGORITMO
+		/*
+		 * 1)Fazer a contagem dos items repetidos - verificar a frequencia de cada um deles
+		 * 2)Fazer uma poda de acordo com a confianca, pegar somente aqueles que passam
+		 * nessa primera validacao
+		 * 3)Fazer todas as combinacoes(2 a 2) e ver se passam na validacao da confianca.
+		 */
+		
 		return null;
 	}
 	
