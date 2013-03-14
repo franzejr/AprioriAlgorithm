@@ -11,28 +11,39 @@ import br.ufc.datamining.DAO.Local;
 import br.ufc.datamining.DAO.Person;
 
 public class Importer {
-	HashMap<String, Person> persons = new HashMap<String, Person>();
+	ArrayList<Person> persons;
 	HashSet<Local> locals = new HashSet<Local>();
 
-	public ArrayList<Person> doImport(String path) throws Exception {
+	public void doImport(String path) throws Exception {	
+		
+		Person person = null;
+		Local local = null;
+		HashMap<String, Person> personsAux = new HashMap<String, Person>();
+		
 		BufferedReader CSVFile = new BufferedReader(new FileReader(path));
 		String dataRow = CSVFile.readLine();
 		while (dataRow != null) {
 			String[] dataArray = dataRow.split(",");
-			Person person = null;
+			person = null;
 			//System.out.println(dataArray[3]+" ");
-			if (persons.containsKey(dataArray[1])) {
-				person = persons.get(dataArray[1]);
+			if (personsAux.containsKey(dataArray[1])) {
+				person = personsAux.get(dataArray[1]);
 			}
 			else{
 				person = new Person(dataArray[1]);
-				persons.put(dataArray[1], person);
+				personsAux.put(dataArray[1], person);
 			}
-			
-			person.addCheckIn(dataArray[0],dataArray[3]);
+			local = new Local(dataArray[0],dataArray[3]);
+			person.addCheckIn(local);
+			locals.add(local);
 			dataRow = CSVFile.readLine();
 		}
-		ArrayList<Person> list = new ArrayList<Person>(persons.values());
-		return list;
+		persons = new ArrayList<Person>(personsAux.values());
+	}
+	public ArrayList<Person> getPersons(){
+		return persons; 
+	}
+	public ArrayList<Local> getLocals() {
+		return new ArrayList<Local>(locals);
 	}
 }

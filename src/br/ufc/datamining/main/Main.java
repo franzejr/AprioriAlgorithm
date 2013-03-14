@@ -16,33 +16,46 @@ import br.ufc.datamining.importer.Importer;
 public class Main {
 
 	public static void main(String[] args) {
-		Importer importer = new Importer();
+		
 		ArrayList<Person> persons = null;
-		InstancesBasedModelImpl data = new InstancesBasedModelImpl();
+		ArrayList<Local> locals = null;
 		
 		try {
-			persons = importer.doImport("data/fortaleza_basketmarket.csv");
+			Importer importer = new Importer();
+			importer.doImport("data/fortaleza_basketmarket.csv");
+			persons = importer.getPersons();
+			locals = importer.getLocals();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		System.out.println("dsfsdff" + persons.size());
+		/*System.out.println("dsfsdff" + persons.size());
 		for (Person person : persons) {
-			System.out.println("Person: " + person.getID());
+			System.out.println("\nPerson: " + person.getID());
 			for (Local local : person.getCheckIns()) {
 				System.out.print(local.getID() + " ");
 				//TODO
 				data.addAttribute(person.getID(),Type.STRING,local);
 			}
+		}*/
+		/*int n = 0;
+		for (Local local1 : locals) {
+			for ( Local local2 : locals) {
+				if(local1.equals(local2))
+					n++;			
+			}
 		}
-		
+		System.out.println("Teste :"+n+" "+locals.size());*/
 
 		Parameters parameters = new Parameters();
-		parameters.addParam("confidence", 2);
-		parameters.addParam("support", 2);
+		parameters.addParam("confidence", 0.2);
+		parameters.addParam("support", 0.2);
+
+		InstancesBasedModelImpl data = new InstancesBasedModelImpl();
 		
 		Apriori apriori = new Apriori();
-		
+		apriori.setLocals(locals);
+		apriori.setPersons(persons);
 		ListModelImpl<IAssociationRule> associations = apriori.execute(data, parameters);
 		System.out.println("RESULTS:");
 		for( IAssociationRule associationRule : associations.getInstances() ){
